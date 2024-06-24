@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import "./index.css";
+
+import Pricing from "./Pricing";
+
+import Card from "./Card";
 
 import axios from "axios";
 let url = "https://swapi.dev/api/people/?page=2";
@@ -27,13 +32,19 @@ function App() {
     fetchData();
   }, []);
   return (
-    <ul>
-      {data
-        ? data.map((el) => {
-            return <li key={el.name}>{el.name}</li>;
-          })
-        : "no data"}
-    </ul>
+    <div>
+      <ul className="text-xl font-bold underline">
+        {data
+          ? data.map((el) => {
+              return <li key={el.name}>{el.name}</li>;
+            })
+          : "no data"}
+      </ul>
+
+      <Card />
+
+      <Pricing />
+    </div>
   );
 }
 
