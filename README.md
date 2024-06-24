@@ -24,3 +24,5 @@
 4. favorites - two actions dispatch("add"), dispatch("remove")
 5. dataFiltered - dispatch("set data filtered"), dispatch("clear data filtered")
 6. serachInputValue dispatch("set input"), dispatch("clear input")
+
+Now. Fork it and create this glorious app.
