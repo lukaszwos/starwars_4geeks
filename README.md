@@ -16,7 +16,7 @@
 1. / - some general buckets with categories of items/people/aliens/...
 2. /details/:id - dynamic route which will map {id} to {index +1} in array of people
 
-### State management/context
+## State management/context
 
 1. Data imported on launch = data
 2. our reducer [data, dispatch]
