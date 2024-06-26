@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
+
 import "./index.css";
 
 import Pricing from "./Pricing";
+import Fallback from "./Fallback";
 
 import Card from "./Card";
 
 import axios from "axios";
-let url = "https://swapi.dev/api/people/?page=2";
+
+let URL = "https://swapi.dev/api/people/?page=";
+let URLS = [...Array(9)].map((el, i) => {
+  return `${URL}${i + 1}`;
+});
+
 let imgBase = "https://starwars-visualguide.com/assets/img/characters";
 
 function App() {
@@ -14,17 +21,14 @@ function App() {
   // Item 1 from readme
   useEffect(() => {
     async function fetchData() {
-      try {
-        let response = await axios.get(url);
-        let people = response.data.results.map((element, i) => {
-          // element.img = imgBase + "/" + i+1
-          // element.img = `${imgBase}/${i+1}`
-          let img = `${imgBase}/${i + 1}`;
+      let fetches = URLS.map((el) => {
+        return axios.get(el);
+      });
 
-          return { ...element, img };
+      try {
+        Promise.all(fetches).then((results) => {
+          setData(results.map((el) => el.data.results).flat());
         });
-        setData(people);
-        console.log(response);
       } catch (err) {
         console.error(err);
       }
