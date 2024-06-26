@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
+import { Routes, Route } from "react-router-dom";
 import { TheContext } from "./context/context";
 import "./index.css";
-
-import axios from "axios";
 
 import Cards from "./Cards";
 import Card from "./Card";
 import Navbar from "./Navbar";
+import Profile from "./Profile";
 
 function App() {
   const { state, dispatch } = useContext(TheContext);
@@ -14,13 +14,22 @@ function App() {
   return (
     <div className="container mx-auto">
       <Navbar />
-      <Cards>
-        {state.dataImported.length > 0
-          ? state.dataImported.map((person) => (
-              <Card key={person.name} person={person} />
-            ))
-          : "Loading..."}
-      </Cards>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Cards>
+              {state.dataImported.length > 0
+                ? state.dataImported.map((person, i) => (
+                    <Card key={person.id} person={person} />
+                  ))
+                : "Loading..."}
+            </Cards>
+          }
+        />
+
+        <Route path="/people/:id" element={<Profile />} />
+      </Routes>
     </div>
   );
 }

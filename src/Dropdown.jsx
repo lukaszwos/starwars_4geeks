@@ -1,12 +1,17 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
+import { useContext } from "react";
+
+import { TheContext } from "./context/context";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 let favs = ["leia", "luke", "anakin"];
 export default function Dropdown() {
+  const { state, dispatch } = useContext(TheContext);
   return (
     <Menu as="div" className="relative inline-block text-left pt-2">
       <div>
@@ -24,7 +29,7 @@ export default function Dropdown() {
         className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
       >
         <div className="py-1">
-          {favs.map((el) => {
+          {state.favourites.map((el) => {
             return (
               <MenuItem key={Math.random()}>
                 {({ focus }) => (
@@ -35,7 +40,7 @@ export default function Dropdown() {
                       "block px-4 py-2 text-sm"
                     )}
                   >
-                    {el}
+                    {el.name}
                   </a>
                 )}
               </MenuItem>
