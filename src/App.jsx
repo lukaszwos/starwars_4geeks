@@ -8,6 +8,7 @@ import Fallback from "./Fallback";
 import Card from "./Card";
 
 import axios from "axios";
+import Cards from "./Cards";
 
 let URL = "https://swapi.dev/api/people/?page=";
 let URLS = [...Array(9)].map((el, i) => {
@@ -27,8 +28,18 @@ function App() {
 
       try {
         Promise.all(fetches).then((results) => {
-          setData(results.map((el) => el.data.results).flat());
+          setData(
+            results
+              .map((el) => el.data.results)
+              .flat()
+              .map((el, i) => {
+                let img = `${imgBase}/${i + 1}.jpg`;
+                return { ...el, img };
+              })
+          );
         });
+
+        console.log(data);
       } catch (err) {
         console.error(err);
       }
@@ -37,15 +48,9 @@ function App() {
   }, []);
   return (
     <div>
-      <ul className="text-xl font-bold underline">
-        {data
-          ? data.map((el) => {
-              return <li key={el.name}>{el.name}</li>;
-            })
-          : "no data"}
-      </ul>
-
-      <Card />
+      <Cards>
+        {data ? data.map((person) => <Card person={person} />) : "Loading..."}
+      </Cards>
 
       <Pricing />
     </div>
