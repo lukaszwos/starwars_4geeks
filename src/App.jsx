@@ -15,8 +15,8 @@ function App() {
     <div className="container mx-auto">
       <Navbar />
       <Cards>
-        {state.data.length > 0
-          ? state.data.map((person) => (
+        {state.dataImported.length > 0
+          ? state.dataImported.map((person) => (
               <Card key={person.name} person={person} />
             ))
           : "Loading..."}

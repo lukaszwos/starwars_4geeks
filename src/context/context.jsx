@@ -12,11 +12,11 @@ let imgBase = "https://starwars-visualguide.com/assets/img/characters";
 function ContextWrapper({ value, children }) {
   function reducer(state, action) {
     if ((action.type = "set data")) {
-      return { ...state, data: action.payload };
+      return { ...state, dataImported: action.payload };
     }
   }
   //   const [data, setData] = useState([]);
-  const [state, dispatch] = useReducer(reducer, { data: [] });
+  const [state, dispatch] = useReducer(reducer, { dataImported: [] });
 
   useEffect(() => {
     async function fetchData() {
@@ -38,7 +38,7 @@ function ContextWrapper({ value, children }) {
           dispatch({ type: "set data", payload: results });
         });
 
-        console.log(state.data);
+        console.log(state.dataImported);
       } catch (err) {
         console.error(err);
       }
