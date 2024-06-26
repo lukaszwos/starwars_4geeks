@@ -1,7 +1,9 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import { TheContext } from "./context/context";
 
@@ -9,7 +11,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-let favs = ["leia", "luke", "anakin"];
 export default function Dropdown() {
   const { state, dispatch } = useContext(TheContext);
   return (
@@ -33,15 +34,29 @@ export default function Dropdown() {
             return (
               <MenuItem key={Math.random()}>
                 {({ focus }) => (
-                  <a
-                    href="#"
+                  <div
                     className={classNames(
-                      focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      focus
+                        ? "bg-gray-100 text-gray-900 flex"
+                        : "text-gray-700",
+                      "flex justify-between",
                       "block px-4 py-2 text-sm"
                     )}
                   >
-                    {el.name}
-                  </a>
+                    <Link to={`/people/${el.id}`}>
+                      <div>{el.name}</div>
+                    </Link>
+                    <TrashIcon
+                      width={20}
+                      onClick={() => {
+                        console.log(el);
+                        dispatch({
+                          type: "remove from favourites",
+                          payload: el,
+                        });
+                      }}
+                    />
+                  </div>
                 )}
               </MenuItem>
             );

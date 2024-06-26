@@ -19,7 +19,7 @@ function Profile() {
   return (
     <div className="bg-white py-10 ">
       <div className="mx-auto max-w-7xl px-2 lg:px-2">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+        <div className="mx-auto ">
           <Link to="/">
             <p
               href="#"
@@ -30,14 +30,14 @@ function Profile() {
           </Link>
           <img src={person.img} />
           <div>
-            <div className="text-base leading-7 text-gray-700 lg:max-w-lg">
+            <div className="text-base leading-7 text-gray-700">
               <p className="text-base font-semibold leading-7 text-indigo-600">
                 Species
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {person.name}
               </h1>
-              <div className="max-w-xl">
+              <div className="max-w-3xl">
                 <p className="mt-6">
                   Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
                   risus enim. Mattis mauris semper sed amet vitae sed turpis id.

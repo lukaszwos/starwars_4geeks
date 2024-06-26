@@ -21,7 +21,13 @@ function reducer(state, action) {
     return { ...state, favourites: [...state.favourites, action.payload] };
   }
   if (action.type === "remove from favourites") {
-    return { ...state };
+    let newFavourites = state.favourites.filter((el) => {
+      return el.id !== action.payload.id;
+    });
+
+    console.log(state.favourites);
+
+    return { ...state, favourites: newFavourites };
   }
   if (action.type === "set dataFiltered") {
     return { ...state };
@@ -45,9 +51,9 @@ async function fetchData(dispatch) {
           let img = `${imgBase}/${i < 18 ? i + 1 : i + 2}.jpg`;
           return { ...el, img };
         })
-        .map((el) => {
+        .map((el, i) => {
           let id = uuid();
-          return { ...el, id };
+          return { ...el, id: id };
         });
 
       results = results.filter((el) => el.name !== "Wedge Antilles");
