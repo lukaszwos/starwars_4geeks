@@ -28,15 +28,16 @@ function App() {
 
       try {
         Promise.all(fetches).then((results) => {
-          setData(
-            results
-              .map((el) => el.data.results)
-              .flat()
-              .map((el, i) => {
-                let img = `${imgBase}/${i + 1}.jpg`;
-                return { ...el, img };
-              })
-          );
+          results = results
+            .map((el) => el.data.results)
+            .flat()
+            .map((el, i) => {
+              let img = `${imgBase}/${i < 18 ? i + 1 : i + 2}.jpg`;
+              return { ...el, img };
+            });
+
+          results = results.filter((el) => el.name !== "Wedge Antilles");
+          setData(results);
         });
 
         console.log(data);
