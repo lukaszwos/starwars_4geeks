@@ -49,7 +49,6 @@ export default function Dropdown() {
                     <TrashIcon
                       width={20}
                       onClick={() => {
-                        console.log(el);
                         dispatch({
                           type: "remove from favourites",
                           payload: el,

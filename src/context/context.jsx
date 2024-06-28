@@ -10,6 +10,10 @@ let URLS = [...Array(9)].map((el, i) => {
 
 let imgBase = "https://starwars-visualguide.com/assets/img/characters";
 
+dispatch({ type: "set data", payload: datafromFetch });
+
+dispatch({ type: "add to favourites", payload: newElement });
+
 function reducer(state, action) {
   if (action.type === "set data") {
     return { ...state, dataImported: action.payload };
@@ -20,12 +24,11 @@ function reducer(state, action) {
     }
     return { ...state, favourites: [...state.favourites, action.payload] };
   }
+
   if (action.type === "remove from favourites") {
     let newFavourites = state.favourites.filter((el) => {
       return el.id !== action.payload.id;
     });
-
-    console.log(state.favourites);
 
     return { ...state, favourites: newFavourites };
   }
