@@ -8,11 +8,9 @@ let URLS = [...Array(9)].map((el, i) => {
   return `${URL}${i + 1}`;
 });
 
+() => {};
+
 let imgBase = "https://starwars-visualguide.com/assets/img/characters";
-
-dispatch({ type: "set data", payload: datafromFetch });
-
-dispatch({ type: "add to favourites", payload: newElement });
 
 function reducer(state, action) {
   if (action.type === "set data") {
@@ -52,11 +50,8 @@ async function fetchData(dispatch) {
         .flat()
         .map((el, i) => {
           let img = `${imgBase}/${i < 18 ? i + 1 : i + 2}.jpg`;
-          return { ...el, img };
-        })
-        .map((el, i) => {
           let id = uuid();
-          return { ...el, id: id };
+          return { ...el, img, id };
         });
 
       results = results.filter((el) => el.name !== "Wedge Antilles");

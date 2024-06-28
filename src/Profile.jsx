@@ -3,7 +3,7 @@ import { TheContext } from "./context/context";
 import { Link, useParams } from "react-router-dom";
 
 function Profile() {
-  const { state, dispatch } = useContext(TheContext);
+  const { state } = useContext(TheContext);
   const { id } = useParams();
   console.log(id);
   const [person] = state.dataImported.filter((el) => el.id === id);
